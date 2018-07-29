@@ -19,7 +19,7 @@ namespace PS4_PS2_Classics_Gui__WPF_.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -323,6 +323,16 @@ namespace PS4_PS2_Classics_Gui__WPF_.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] PS2J {
+            get {
+                object obj = ResourceManager.GetObject("PS2J", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] Ps4_Error_Sound {
             get {
                 object obj = ResourceManager.GetObject("Ps4_Error_Sound", resourceCulture);
@@ -433,7 +443,7 @@ namespace PS4_PS2_Classics_Gui__WPF_.Properties {
         ///  &lt;param key=&quot;PARENTAL_LEVEL&quot;&gt;5&lt;/param&gt;
         ///  &lt;param key=&quot;REMOTE_PLAY_KEY_ASSIGN&quot;&gt;1&lt;/param&gt;
         ///  &lt;param key=&quot;SERVICE_ID_ADDCONT_ADD_1&quot;&gt;&lt;/param&gt;
-        ///  &lt;par [rest of string was truncated]&quot;;.
+        ///  &lt;param key=&quot;SERV [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string sfo {
             get {
