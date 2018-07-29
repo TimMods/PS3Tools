@@ -26,11 +26,12 @@
     <file targ_path="ps2-emu-compiler.self" orig_path="..\PS2\ps2-emu-compiler.self"/>
     <file targ_path="PS20220WD20050620.crack" orig_path="..\PS2\PS20220WD20050620.crack"/>
     <file targ_path="docs/revision.h" orig_path="..\PS2\docs\revision.h"/>
-    <file targ_path="image/disc01.iso" orig_path="..\PS2\image\disc01.iso"/>
+    <file targ_path="image/disc01.iso" orig_path="..\PS2\image\disc01.iso" pfs_compression="enable"/>
     <file targ_path="lua_include/ee-cpr0-alias.lua" orig_path="..\PS2\lua_include\ee-cpr0-alias.lua"/>
     <file targ_path="lua_include/ee-gpr-alias.lua" orig_path="..\PS2\lua_include\ee-gpr-alias.lua"/>
     <file targ_path="lua_include/ee-hwaddr.lua" orig_path="..\PS2\lua_include\ee-hwaddr.lua"/>
     <file targ_path="lua_include/language.lua" orig_path="..\PS2\lua_include\language.lua"/>
+    <file targ_path="lua_include/sprite.lua" orig_path="..\PS2\lua_include\sprite.lua"/>
     <file targ_path="lua_include/utils.lua" orig_path="..\PS2\lua_include\utils.lua"/>
     <file targ_path="sce_module/libc.prx" orig_path="..\PS2\sce_module\libc.prx"/>
     <file targ_path="sce_module/libSceFios2.prx" orig_path="..\PS2\sce_module\libSceFios2.prx"/>
