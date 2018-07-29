@@ -308,13 +308,8 @@ Special thanks to zordon605 for PS2 Multi Iso Info", "Credits", PS4_MessageBoxBu
 
                     if (Properties.Settings.Default.GetTitle == true)
                     {
-                        txtTitle.Text = isopath;
-                        txtTitle.Text = txtTitle.Text.Remove((txtPath.Text.Length - 4));
-                        txtTitle.Text = txtTitle.Text.Substring(3);
-                        while (txtTitle.Text.Contains("\\"))
-                        {
-                            txtTitle.Text = txtTitle.Text.Substring(txtTitle.Text.IndexOf("\\") + 1);
-                        }
+                        txtTitle.Text = System.IO.Path.GetFileName(isopath);
+                        txtTitle.Text = txtTitle.Text.Substring(0, txtTitle.Text.Length - 4);
                     }
 
                     //now using the file stream we can read the CNF file
@@ -1166,14 +1161,9 @@ if you are using an SSD","Initialization",PS4_MessageBoxButton.YesNo,SoundClass.
                     txtPath.Text = isopath;
                     txtPath.Focus();
                     txtPath.CaretIndex = txtPath.Text.Length;
-                    
-                    txtTitle.Text = isopath;
-                    txtTitle.Text = txtTitle.Text.Remove((txtPath.Text.Length - 4));
-                    txtTitle.Text = txtTitle.Text.Substring(3);
-                    while (txtTitle.Text.Contains("\\"))
-                    {
-                        txtTitle.Text = txtTitle.Text.Substring(txtTitle.Text.IndexOf("\\") + 1);
-                    }
+
+                    txtTitle.Text = System.IO.Path.GetFileName(isopath);
+                    txtTitle.Text = txtTitle.Text.Substring(0, txtTitle.Text.Length - 4);
 
                     //now using the file stream we can read the CNF file
                     using (FileStream isoStream = File.OpenRead(isopath))
