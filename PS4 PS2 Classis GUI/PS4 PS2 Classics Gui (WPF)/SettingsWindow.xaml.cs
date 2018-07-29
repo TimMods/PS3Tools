@@ -115,6 +115,66 @@ namespace PS4_PS2_Classics_Gui__WPF_
                         DefaultValue = "Off";
                     }
                     break;
+                case "★ Use New PS2 Emulator":
+                    if (Properties.Settings.Default.EnableNewEmu == true)
+                    {
+                        DefaultValue = "On";
+                    }
+                    else
+                    {
+                        DefaultValue = "Off";
+                    }
+                    break;
+                case "★ Enable Widescreen (16:9)":
+                    if (Properties.Settings.Default.Widescreen == true)
+                    {
+                        DefaultValue = "On";
+                    }
+                    else
+                    {
+                        DefaultValue = "Off";
+                    }
+                    break;
+                case "★ Possible Game Loading Fix":
+                    if (Properties.Settings.Default.LoadingFix == true)
+                    {
+                        DefaultValue = "On";
+                    }
+                    else
+                    {
+                        DefaultValue = "Off";
+                    }
+                    break;
+                case "★ Possible Graphics & Glitches Fix":
+                    if (Properties.Settings.Default.GraphicsFix == true)
+                    {
+                        DefaultValue = "On";
+                    }
+                    else
+                    {
+                        DefaultValue = "Off";
+                    }
+                    break;
+                case "★ Save last Background Image":
+                    if (Properties.Settings.Default.SaveBackground == true)
+                    {
+                        DefaultValue = "On";
+                    }
+                    else
+                    {
+                        DefaultValue = "Off";
+                    }
+                    break;
+                case "★ Use ISO filename as Game Title":
+                    if (Properties.Settings.Default.GetTitle == true)
+                    {
+                        DefaultValue = "On";
+                    }
+                    else
+                    {
+                        DefaultValue = "Off";
+                    }
+                    break;
 
             }
             set.SValue = DefaultValue;
@@ -133,8 +193,13 @@ namespace PS4_PS2_Classics_Gui__WPF_
             //AddEsttingValues("Replace NP Title ID With PS2 Title ID", "On", new ListView());
             AddEsttingValues("Enable Boot Logo", "On", new ListView());
             AddEsttingValues("Enable PS4 Ambient Music", "On", new ListView());
-
             AddEsttingValues("Enable kozarovv Patches", "Off", new ListView());
+            AddEsttingValues("★ Use New PS2 Emulator", "On", new ListView());
+            AddEsttingValues("★ Enable Widescreen (16:9)", "Off", new ListView());
+            AddEsttingValues("★ Possible Game Loading Fix", "Off", new ListView());
+            AddEsttingValues("★ Possible Graphics & Glitches Fix", "Off", new ListView());
+            AddEsttingValues("★ Save last Background Image", "Off", new ListView());
+            AddEsttingValues("★ Use ISO filename as Game Title", "On", new ListView());
 
             for (int i = 0; i < Values.Count; i++)
             {
@@ -166,6 +231,7 @@ namespace PS4_PS2_Classics_Gui__WPF_
             SkipSettings = true;
             //i dont know why but the dam view keeps comming up
 
+            MainWindowView.Opacity = 1.0f;
             OptionsView.Visibility = Visibility.Hidden;
         }
 
@@ -274,8 +340,24 @@ namespace PS4_PS2_Classics_Gui__WPF_
                         case "Enable kozarovv Patches":
                             Properties.Settings.Default.EnableCustomConfigFetching = true;
                             break;
-
-
+                        case "★ Use New PS2 Emulator":
+                            Properties.Settings.Default.EnableNewEmu = true;
+                            break;
+                        case "★ Enable Widescreen (16:9)":
+                            Properties.Settings.Default.Widescreen = true;
+                            break;
+                        case "★ Possible Game Loading Fix":
+                            Properties.Settings.Default.LoadingFix = true;
+                            break;
+                        case "★ Possible Graphics & Glitches Fix":
+                            Properties.Settings.Default.GraphicsFix = true;
+                            break;
+                        case "★ Save last Background Image":
+                            Properties.Settings.Default.SaveBackground = true;
+                            break;
+                        case "★ Use ISO filename as Game Title":
+                            Properties.Settings.Default.GetTitle = true;
+                            break;
                     }
                     Properties.Settings.Default.Save();//save the settings
                 }
@@ -304,7 +386,24 @@ namespace PS4_PS2_Classics_Gui__WPF_
                         case "Enable kozarovv Patches":
                             Properties.Settings.Default.EnableCustomConfigFetching = false;
                             break;
-
+                        case "★ Use New PS2 Emulator":
+                            Properties.Settings.Default.EnableNewEmu = false;
+                            break;
+                        case "★ Enable Widescreen (16:9)":
+                            Properties.Settings.Default.Widescreen = false;
+                            break;
+                        case "★ Possible Game Loading Fix":
+                            Properties.Settings.Default.LoadingFix = false;
+                            break;
+                        case "★ Possible Graphics & Glitches Fix":
+                            Properties.Settings.Default.GraphicsFix = false;
+                            break;
+                        case "★ Save last Background Image":
+                            Properties.Settings.Default.SaveBackground = false;
+                            break;
+                        case "★ Use ISO filename as Game Title":
+                            Properties.Settings.Default.GetTitle = false;
+                            break;
                     }
                     Properties.Settings.Default.Save();//save the settings
                 }
