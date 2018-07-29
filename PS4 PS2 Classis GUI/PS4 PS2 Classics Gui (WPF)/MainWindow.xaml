@@ -17,7 +17,7 @@
                 <ImageBrush ImageSource="Resources/flow.png"/>
             </DockPanel.OpacityMask>
             <Menu VerticalAlignment="Top" Background="Black" Opacity="0.90">
-                <MenuItem Header="Settings" Click="MenuItem_Click_5" Foreground="White" Height="19" Width="54" Margin="0">
+                <MenuItem Header="Settings" Click="MenuItem_Click_5" Foreground="White" Height="19" Width="53" Margin="-4,0,0,0">
                     <MenuItem Header="Configuration" Click="MenuItem_Click" Foreground="Black" FontWeight="Normal"/>
                     <MenuItem Header="Add Custom PS2 Config File" Click="MenuItem_Click_2" Foreground="Black" FontWeight="Normal" Margin="0,0,-22,0"/>
                     <!--<MenuItem Header="Add Custom .lua configs" Click="MenuItem_Click_3" />-->
@@ -31,7 +31,7 @@
             <Grid>
                 <Grid x:Name="homescreen" Width="840" HorizontalAlignment="Left" MouseDown="Grid_MouseDown" Height="450" Margin="0,0,0,0.4" VerticalAlignment="Bottom">
                     <Image x:Name="iconbox0" Tag="0" HorizontalAlignment="Left" Height="132" Width="132" Margin="50,140,0,0" VerticalAlignment="Top" AllowDrop="True" Source="/Resources/what's new.png" Drop="Icon_Drop" />
-                    <Image x:Name="Icon0" Tag="1" HorizontalAlignment="Left" Height="215" Width="215" Margin="195,142,0,0" VerticalAlignment="Top" AllowDrop="True" Source="Resources/icon0.png" Drop="Icon_Drop" >
+                    <Image x:Name="Icon0" Tag="1" HorizontalAlignment="Left" Height="215" Width="215" Margin="185,142,0,0" VerticalAlignment="Top" AllowDrop="True" Source="Resources/icon0.png" Drop="Icon_Drop" >
                         <Image.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Change Icon" Click="MenuItem_Click_6">
@@ -70,10 +70,10 @@
                         </Rectangle.Fill>
                     </Rectangle>
                     <Label x:Name="selecttitle" Content="" HorizontalAlignment="Left" Margin="422,347,0,0" VerticalAlignment="Top" AllowDrop="False" FontSize="38" FontFamily="Yu Gothic" Foreground="#FFFFFFFF" Width="514" Height="54" Background="{x:Null}" />
-                    <Border x:Name="focuscolor" BorderBrush="#FFFFFFFF" BorderThickness="2" HorizontalAlignment="Left" Height="274" Width="223" Margin="191,138,0,0" VerticalAlignment="Top" >
+                    <Border x:Name="focuscolor" BorderBrush="#FFFFFFFF" BorderThickness="2" HorizontalAlignment="Left" Height="274" Width="223" Margin="181,138,0,0" VerticalAlignment="Top" >
                         <Button x:Name="btnStart" Content="Quick Setup" Margin="0.4,217.4,-0.2,0.2" AllowDrop="False" FontSize="20" FontFamily="Yu Gothic" Foreground="#FFFFFFFF" Opacity="0.7" Background="#FF0051B6" Click="btnStart_Click" Cursor="Hand"/>
                     </Border>
-                    <Border BorderBrush="#BFFFFFFF" BorderThickness="2" HorizontalAlignment="Left" Height="217" Width="219" Margin="193,140,0,0" VerticalAlignment="Top" >
+                    <Border BorderBrush="#BFFFFFFF" BorderThickness="2" HorizontalAlignment="Left" Height="217" Width="219" Margin="183,140,0,0" VerticalAlignment="Top" >
                     </Border>
                     <Image HorizontalAlignment="Left" Height="40" Width="40" Margin="65,54,0,0" VerticalAlignment="Top" Source="/Resources/psplus.png" />
                     <Image HorizontalAlignment="Left" Height="40" Width="40" Margin="577,52,0,0" VerticalAlignment="Top" Source="/Resources/user.png" />
@@ -82,7 +82,7 @@
                 <Grid x:Name="OptionS" MouseDown="Grid_MouseDown" Background="Black" Opacity="0.71" Width="390" HorizontalAlignment="Right" VerticalAlignment="Stretch">
                     <Label x:Name="PS2Titlelbl" Content="PS2 ISO:" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top" AllowDrop="False" FontSize="15" FontFamily="Yu Gothic" Foreground="#FFFFFFFF" Background="{x:Null}" />
 
-                    <TextBox x:Name="txtPath" Text="" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" AllowDrop="False" FontSize="20" FontFamily="Yu Gothic" Foreground="#FFFFFFFF" Height="40" Background="{x:Null}" Width="308"/>
+                    <TextBox x:Name="txtPath" Text="" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" AllowDrop="False" FontSize="20" Foreground="#FFFFFFFF" Height="40" Background="{x:Null}" Width="308" FontFamily="Global User Interface" VerticalContentAlignment="Center"/>
                     <Button x:Name="btnSelectISO" Content="" HorizontalAlignment="Left" Margin="327,76,0,0" VerticalAlignment="Top" Width="53" Height="40" Click="btnSelectISO_Click" BorderBrush="Black">
                         <Button.Background>
                             <ImageBrush ImageSource="Resources/icons8-iso-50 (1).png" Stretch="UniformToFill"/>
@@ -90,8 +90,8 @@
                     </Button>
                     <Label x:Name="lblPS2ID" Content="PS2Title" HorizontalAlignment="Left" Margin="191,116,0,0" VerticalAlignment="Top" AllowDrop="False" FontSize="15
 " FontFamily="Yu Gothic" Foreground="#FFFFFFFF" Background="{x:Null}" />
-                    <TextBox x:Name="txtContentID" Text="CRST00001" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" AllowDrop="False" FontSize="20" FontFamily="Yu Gothic" Foreground="#FFFFFFFF" Height="40" Background="{x:Null}" Width="370"/>
-                    <TextBox x:Name="txtTitle" HorizontalAlignment="Left" Margin="10,234,0,0" VerticalAlignment="Top" AllowDrop="False" FontSize="20" FontFamily="Yu Gothic" Foreground="#FFFFFFFF" Height="40" Background="{x:Null}" Width="370" TextChanged="txtContentID_Copy_TextChanged"/>
+                    <TextBox x:Name="txtContentID" Text="CRST00001" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" AllowDrop="False" FontSize="20" FontFamily="Yu Gothic" Foreground="#FFFFFFFF" Height="40" Background="{x:Null}" Width="370" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="txtTitle" HorizontalAlignment="Left" Margin="10,234,0,0" VerticalAlignment="Top" AllowDrop="False" FontSize="20" FontFamily="Yu Gothic" Foreground="#FFFFFFFF" Height="40" Background="{x:Null}" Width="370" TextChanged="txtContentID_Copy_TextChanged" VerticalContentAlignment="Center"/>
                     <Label x:Name="lblNpTitle" Content="NP Title:" HorizontalAlignment="Left" Margin="10,121,0,0" VerticalAlignment="Top" AllowDrop="False" FontSize="15" FontFamily="Yu Gothic" Foreground="#FFFFFFFF" Background="{x:Null}" />
                     <Label x:Name="lblTitle" Content="Title :" HorizontalAlignment="Left" Margin="10,200,0,0" VerticalAlignment="Top" AllowDrop="False" FontSize="15" FontFamily="Yu Gothic" Foreground="#FFFFFFFF" Background="{x:Null}" />
                     <Button HorizontalAlignment="Left" VerticalAlignment="Top"
