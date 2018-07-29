@@ -306,6 +306,16 @@ Special thanks to zordon605 for PS2 Multi Iso Info", "Credits", PS4_MessageBoxBu
                     txtPath.Focus();
                     txtPath.CaretIndex = txtPath.Text.Length;
 
+                    if (Properties.Settings.Default.GetTitle == true)
+                    {
+                        txtTitle.Text = isopath;
+                        txtTitle.Text = txtTitle.Text.Remove((txtPath.Text.Length - 4));
+                        txtTitle.Text = txtTitle.Text.Substring(3);
+                        while (txtTitle.Text.Contains("\\"))
+                        {
+                            txtTitle.Text = txtTitle.Text.Substring(txtTitle.Text.IndexOf("\\") + 1);
+                        }
+                    }
 
                     //now using the file stream we can read the CNF file
                     using (FileStream isoStream = File.OpenRead(isopath))
@@ -524,6 +534,43 @@ if you are using an SSD","Initialization",PS4_MessageBoxButton.YesNo,SoundClass.
                 }
 
                 #endregion << Gui Music >>
+
+                #region << Background Image >>
+
+                if (File.Exists(AppCommonPath() + @"\pic1.png"))
+                {
+                    //check if to save background
+                    if (Properties.Settings.Default.SaveBackground == true)
+                    {
+                        string bgimage;
+                        if (File.Exists(AppCommonPath() + @"\pic2.png"))
+                        {
+                            File.Delete(AppCommonPath() + @"\pic1.png");
+                            File.Copy(AppCommonPath() + @"\pic2.png", AppCommonPath() + @"\pic1.png", true);
+                            File.Delete(AppCommonPath() + @"\pic2.png");
+                        }
+
+                        bgimage = (AppCommonPath() + @"\pic1.png");
+                        ImageBrush imgB = new ImageBrush();
+
+                        BitmapImage btpImg = new BitmapImage();
+                        btpImg.BeginInit();
+                        btpImg.UriSource = new Uri(bgimage);
+                        btpImg.EndInit();
+                        imgB.ImageSource = btpImg;
+                        BackgroundImage.Background = imgB;
+                    }
+                    else
+                    {
+                        File.Delete(AppCommonPath() + @"\pic1.png");
+                        if (File.Exists(AppCommonPath() + @"\pic2.png"))
+                        {
+                            File.Delete(AppCommonPath() + @"\pic2.png");
+                        }
+                    }
+                }
+
+                #endregion << Background Image >>
 
                 #region << Version Numbering >>
 
@@ -760,6 +807,19 @@ if you are using an SSD","Initialization",PS4_MessageBoxButton.YesNo,SoundClass.
                             converted = ResizeImage(converted, 1920, 1080);//converts the image to the correct size
                             converted = ConvertTo24bpp(converted);//converts image to 24bpp
                             converted.Save(AppCommonPath() + @"PS2\sce_sys\pic1.png", System.Drawing.Imaging.ImageFormat.Png);
+
+                            //check if to save background
+                            if (Properties.Settings.Default.SaveBackground == true)
+                            {
+                                if (File.Exists(AppCommonPath() + @"\pic1.png"))
+                                {
+                                    converted.Save(AppCommonPath() + @"\pic2.png", System.Drawing.Imaging.ImageFormat.Png);
+                                }
+                                else
+                                {
+                                    converted.Save(AppCommonPath() + @"\pic1.png", System.Drawing.Imaging.ImageFormat.Png);
+                                }
+                            }
                         });
                 UpdateString("Moving Custom PS2 Config");
                 //add custom config
@@ -818,6 +878,40 @@ if you are using an SSD","Initialization",PS4_MessageBoxButton.YesNo,SoundClass.
                     textfile =textfile.Replace(@"#--path-patches=""/app0/patches""", @"--path-patches=""/app0/patches""");//add patches
                     textfile = textfile.Replace(@"#--path-featuredata=""/app0/patches""", @"--path-featuredata=""/app0/patches""");//add featuredata
                     textfile = textfile.Replace(@"#--path-toolingscript=""/app0/patches""", @"--path-toolingscript=""/app0/patches""");//#--path-toolingscript=""/app0/patches"""
+                    File.WriteAllText(AppCommonPath() + @"PS2\config-emu-ps4.txt", textfile);
+                }
+
+                //widescreen mod
+                if (Properties.Settings.Default.Widescreen == true)
+                {
+                    //modify config file 
+                    var textfile = File.ReadAllText(AppCommonPath() + @"PS2\config-emu-ps4.txt");
+                    textfile = textfile.Replace(@"#--host-display-mode=full", @"--host-display-mode=full");//add widescreen
+                    File.WriteAllText(AppCommonPath() + @"PS2\config-emu-ps4.txt", textfile);
+                }
+
+                //loading game fix mod
+                if (Properties.Settings.Default.LoadingFix == true)
+                {
+                    //modify config file 
+                    var textfile = File.ReadAllText(AppCommonPath() + @"PS2\config-emu-ps4.txt");
+                    textfile = textfile.Replace(@"#--fpu-accurate-addsub-range=0x104204,0x1042B8", @"--fpu-accurate-addsub-range=0x104204,0x1042B8");//add loading fix
+                    File.WriteAllText(AppCommonPath() + @"PS2\config-emu-ps4.txt", textfile);
+                }
+
+                //loading game fix mod
+                if (Properties.Settings.Default.GraphicsFix == true)
+                {
+                    //modify config file 
+                    var textfile = File.ReadAllText(AppCommonPath() + @"PS2\config-emu-ps4.txt");
+                    textfile = textfile.Replace(@"#--fpu-no-clamping=0", @"--fpu-no-clamping=0");
+                    textfile = textfile.Replace(@"#--fpu-clamp-results=1", @"--fpu-clamp-results=1");
+                    textfile = textfile.Replace(@"#--vu0-no-clamping=0", @"--vu0-no-clamping=0");
+                    textfile = textfile.Replace(@"#--vu1-no-clamping=0", @"--vu1-no-clamping=0");
+                    textfile = textfile.Replace(@"#--vu0-clamp-results=1", @"--vu0-clamp-results=1");
+                    textfile = textfile.Replace(@"#--vu1-clamp-results=1", @"--vu1-clamp-results=1");
+                    textfile = textfile.Replace(@"#--cop2-no-clamping=0", @"--cop2-no-clamping=0");
+                    textfile = textfile.Replace(@"#--cop2-clamp-results=1", @"--cop2-clamp-results=1");
                     File.WriteAllText(AppCommonPath() + @"PS2\config-emu-ps4.txt", textfile);
                 }
 
@@ -942,7 +1036,7 @@ if you are using an SSD","Initialization",PS4_MessageBoxButton.YesNo,SoundClass.
         private void MenuItem_Click_6(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Title = "Select Image";
+            dlg.Title = "Select Icon Image";
             dlg.Filter = "Image File|*.bmp;*.jpg;*.jpeg;*.png";
             dlg.InitialDirectory = Environment.SpecialFolder.MyComputer.ToString();
             if (dlg.ShowDialog() == true)
@@ -962,7 +1056,7 @@ if you are using an SSD","Initialization",PS4_MessageBoxButton.YesNo,SoundClass.
         private void MenuItem_Click_7(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Title = "Select Image";
+            dlg.Title = "Select Background Image";
             dlg.Filter = "Image File|*.bmp;*.jpg;*.jpeg;*.png";
             dlg.InitialDirectory = Environment.SpecialFolder.MyComputer.ToString();
             if (dlg.ShowDialog() == true)
@@ -1031,7 +1125,203 @@ if you are using an SSD","Initialization",PS4_MessageBoxButton.YesNo,SoundClass.
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
-            CustomMessageBox("PS4 Emulation is currently not Possible :P we will have to wait and see what AlexAltea comes up with", "PS4 Emulation", PS4_MessageBoxButton.OK, MessageBoxImage.Information);
+            //set defualt values
+            txtPath.IsEnabled = true;
+            lblPS2ID.Visibility = Visibility.Visible;
+
+            //UpdateInfo("Checking if there is already a mutli iso screen open and closing it");
+
+            //close open form 
+            //this closes any open form
+            if (Application.Current.Windows.OfType<MultipleISO_s>().Count() == 1)
+                Application.Current.Windows.OfType<MultipleISO_s>().First().Close();
+            MultipleISO_s multi = new MultipleISO_s();
+            //UpdateInfo("Open File Dialog");
+            //Open File Dialog For ISO Files
+            OpenFileDialog thedialog = new OpenFileDialog();
+            thedialog.Title = "Select ISO";
+            thedialog.Filter = "Image File|*.iso";
+            thedialog.Multiselect = false;
+            thedialog.InitialDirectory = Environment.SpecialFolder.MyComputer.ToString();
+            if (thedialog.ShowDialog() == true)
+            {
+                //clear the config file as well
+                PS2CutomLua.Clear();
+
+                //UpdateInfo("adding iso files to list");
+                isoFiles = thedialog.FileNames.ToList<string>();//tada now we know how many iso's there is 
+                if (isoFiles.Count > 7)
+                {
+
+                    System.Windows.MessageBox.Show("Maximum amount of ISO's allowed by the PS4 in a classic is 7");
+                    isoFiles.Clear();
+                    return;
+                }
+                if (isoFiles.Count == 1)
+                {
+                    //UpdateInfo("Standard ISO Method");
+                    #region << For Single File >>
+                    //set the path and the text on the gui
+                    string isopath = thedialog.FileName;
+                    txtPath.Text = isopath;
+                    txtPath.Focus();
+                    txtPath.CaretIndex = txtPath.Text.Length;
+                    
+                    txtTitle.Text = isopath;
+                    txtTitle.Text = txtTitle.Text.Remove((txtPath.Text.Length - 4));
+                    txtTitle.Text = txtTitle.Text.Substring(3);
+                    while (txtTitle.Text.Contains("\\"))
+                    {
+                        txtTitle.Text = txtTitle.Text.Substring(txtTitle.Text.IndexOf("\\") + 1);
+                    }
+
+                    //now using the file stream we can read the CNF file
+                    using (FileStream isoStream = File.OpenRead(isopath))
+                    {
+                        //use disk utils to read iso quickly
+                        CDReader cd = new CDReader(isoStream, true);
+                        //look for the spesific file
+                        Stream fileStream = cd.OpenFile(@"SYSTEM.CNF", FileMode.Open);
+                        // Use fileStream...
+                        TextReader tr = new StreamReader(fileStream);
+                        string fullstring = tr.ReadToEnd();//read string to end this will read all the info we need
+
+                        //mine for info
+                        string Is = @"\";
+                        string Ie = ";";
+
+                        //mine the start and end of the string
+                        int start = fullstring.ToString().IndexOf(Is) + Is.Length;
+                        int end = fullstring.ToString().IndexOf(Ie, start);
+                        if (end > start)
+                        {
+                            string PS2Id = fullstring.ToString().Substring(start, end - start);
+
+                            if (PS2Id != string.Empty)
+                            {
+                                OriginalPS2ID = PS2Id;
+                                PS2ID = PS2Id.Replace(".", "");
+                                lblPS2ID.Content = "PS2 ID : " + PS2Id.Replace(".", "");
+
+                                if (Properties.Settings.Default.EnablePS2IDReplace == true)
+                                {
+                                    txtContentID.Text = PS2ID.Replace("_", "");
+                                }
+                            }
+                            else
+                            {
+                                System.Windows.MessageBox.Show("Could not load PS2 ID");
+                            }
+                        }
+                        else
+                        {
+                            MessageBoxResult msrlt = System.Windows.MessageBox.Show("Could not load PS2 ID\n\n wpuld you like to submit an issue ?", "Error Reporting", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
+                            if (msrlt == MessageBoxResult.Yes)
+                            {
+                                //load github issue page
+                                Process.Start(@"https://github.com/xXxTheDarkprogramerxXx/PS3Tools/issues");
+                            }
+
+                        }
+                    }
+
+                    #endregion << For Single File >>
+                }
+                else if (isoFiles.Count > 1)
+                {
+                    //UpdateInfo("Multi ISO Method");
+                    txtPath.IsEnabled = false;
+                    lblPS2ID.Visibility = Visibility.Hidden;
+                    //UpdateInfo("Opening Mutli ISO Screen");
+                    multi.Show();
+                    //multi.SetDesktopLocation(this.Location.X + this.Size.Width, this.Location.Y);
+                }
+            }
+
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Title = "Select Icon Image";
+            dlg.Filter = "Image File|*.bmp;*.jpg;*.jpeg;*.png";
+            dlg.InitialDirectory = Environment.SpecialFolder.MyComputer.ToString();
+            if (dlg.ShowDialog() == true)
+            {
+                string fileName;
+                fileName = dlg.FileName;
+
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.UriSource = new Uri(fileName);
+                image.EndInit();
+                Icon0.Source = image;
+                Icon0.Stretch = Stretch.Fill;
+            }
+            
+            //check if to save background
+            if ( (Properties.Settings.Default.SaveBackground == false) || (File.Exists(AppCommonPath() + @"\pic1.png") == false) )
+            {
+                if (File.Exists(AppCommonPath() + @"\pic1.png"))
+                {
+                    File.Delete(AppCommonPath() + @"\pic1.png");
+                }
+                if (File.Exists(AppCommonPath() + @"\pic2.png"))
+                {
+                    File.Delete(AppCommonPath() + @"\pic2.png");
+                }
+                OpenFileDialog dlg2 = new OpenFileDialog();
+                dlg2.Title = "Select Background Image";
+                dlg2.Filter = "Image File|*.bmp;*.jpg;*.jpeg;*.png";
+                dlg2.InitialDirectory = Environment.SpecialFolder.MyComputer.ToString();
+                if (dlg2.ShowDialog() == true)
+                {
+                    string fileName;
+                    fileName = dlg2.FileName;
+                    ImageBrush imgB = new ImageBrush();
+
+                    BitmapImage btpImg = new BitmapImage();
+                    btpImg.BeginInit();
+                    btpImg.UriSource = new Uri(fileName);
+                    btpImg.EndInit();
+                    imgB.ImageSource = btpImg;
+                    BackgroundImage.Background = imgB;
+                }
+            }
+
+            UpdateInfo("Extarcting Resources Started");
+            //extract all resources for the current program
+            ExtractAllResources();
+
+
+            UpdateInfo("Converting ISO(s) to PKG ");
+
+            CheckString();
+
+            //moving code over
+            ExtractAllResources();//extarct all resources when we need it
+
+            UpdateInfo("Save File Dialog");
+
+            System.Windows.Forms.FolderBrowserDialog saveFileDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            //saveFileDialog1.Filter = "PS4 PKG|*.pkg";
+            //saveFileDialog1.Title = "Save an PS4 PKG File";
+            //saveFileDialog1.ov
+            if (System.Windows.Forms.DialogResult.OK != saveFileDialog1.ShowDialog())
+            {
+                return;
+            }
+
+            tempkeeper = saveFileDialog1;
+            try
+            {
+                OpenCloseWaitScreen(true);
+                if (backgroundWorker1.IsBusy == false)
+                {
+                    backgroundWorker1.RunWorkerAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                OpenCloseWaitScreen(false);
+                System.Windows.MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnMutePlaySound_Click(object sender, RoutedEventArgs e)
@@ -1478,8 +1768,18 @@ if you are using an SSD","Initialization",PS4_MessageBoxButton.YesNo,SoundClass.
             UpdateInfo("Writing Binary File to Temp Path " + "\n Written : " + AppCommonPath() + @"\PS2Emu\" + "param.sfo");
             System.IO.File.WriteAllBytes(AppCommonPath() + "orbis-pub-cmd.exe", Properties.Resources.orbis_pub_cmd);
             UpdateInfo("Writing Binary File to Temp Path " + "\n Written : " + AppCommonPath() + "orbis-pub-cmd.exe");
-            System.IO.File.WriteAllBytes(AppCommonPath() + "PS2.zip", Properties.Resources.PS2);
+
+            if (Properties.Settings.Default.EnableNewEmu == true)
+            {
+                System.IO.File.WriteAllBytes(AppCommonPath() + "PS2.zip", Properties.Resources.PS2J);
+            }
+            else
+            {
+                System.IO.File.WriteAllBytes(AppCommonPath() + "PS2.zip", Properties.Resources.PS2);
+            }
+
             UpdateInfo("Writing Binary File to Temp Path " + "\n Written : " + AppCommonPath() + "PS2.zip");
+
             System.IO.File.WriteAllBytes(AppCommonPath() + "ext.zip", Properties.Resources.ext);
             UpdateInfo("Writing Binary File to Temp Path " + "\n Written : " + AppCommonPath() + "ext.zip");
 
