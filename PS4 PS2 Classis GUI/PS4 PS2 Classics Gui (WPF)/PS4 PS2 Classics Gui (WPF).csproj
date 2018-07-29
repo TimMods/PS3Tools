@@ -264,7 +264,7 @@
     <Resource Include="Resources\flow.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\pkg.jpg" />
+    <Resource Include="Resources\pkg.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\icon0.png" />
